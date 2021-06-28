@@ -20,5 +20,11 @@ yarn build
 yarn lint
 ```
 
+### login/password
+```
+test
+test
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
