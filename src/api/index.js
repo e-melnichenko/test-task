@@ -3,7 +3,7 @@ const BASE_URL = 'https://nominatim.openstreetmap.org'
 export const getGeoItems = (query) => {
   return fetch(`${BASE_URL}/search?q=${query}&format=json`)
     .then(handleErrors)
-    .then(res => {console.log(res); return res.json()})
+    .then(res => res.json())
     .catch(error => console.log(error))
 }
 

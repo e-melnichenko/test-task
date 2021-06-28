@@ -9,7 +9,7 @@
             v-model="search"
             required
           />
-          <v-btn color="green" type="submit" class="mr-4 white--text">
+          <v-btn color="green" type="submit" class="mr-4 white--text" :loading="loading">
             Найти
           </v-btn>
           <v-btn color="blue" type="button" class="white--text" @click="resetForm">
@@ -40,6 +40,7 @@
 
     props: {
       items: Array,
+      loading: Boolean,
     },
 
     data() {

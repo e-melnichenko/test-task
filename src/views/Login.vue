@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row justify="center">
-      <v-col cols="4">
+      <v-col cols="4" v-if="!isAuthenticated">
         <v-form class="pt-16" @submit.prevent="handleSubmit">
           <v-text-field
             label="Логин"
@@ -25,6 +25,10 @@
           <p class="error--text mt-4" v-if="error && errorText">{{ errorText }}</p>
         </v-form>
       </v-col>
+      <v-col cols="4" v-else>
+        <p>Вы вошли как test</p>
+        <v-btn @click="logOut">Выйти</v-btn>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -36,8 +40,6 @@
   export default {
     name: "Login",
 
-    isAuthenticated: isAuthenticated(),
-
     data() {
       return {
         login: '',
@@ -45,6 +47,10 @@
         error: false,
         errorText: '',
       }
+    },
+
+    computed: {
+      isAuthenticated,
     },
 
     methods: {
@@ -68,10 +74,12 @@
         const date = new Date();
         date.setHours(date.getHours() + 12);
         return (date.toUTCString())
-      }
+      },
+      logOut() {
+        document.cookie = `auth-token=0; max-age=0`;
+        this.$router.go();
+      },
     }
-
-
   }
 </script>
 

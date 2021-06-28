@@ -42,7 +42,7 @@
     data () {
       return {
         url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-        zoom: 8,
+        zoom: 10,
       };
     },
   }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <search-form @change-active="handleChangeActive" :items="items" @update-items="updateItems"/>
+    <search-form @change-active="handleChangeActive" :items="items" @update-items="updateItems" :loading="loading"/>
     <main-map :center="center" :items="items"/>
   </div>
 </template>
@@ -22,6 +22,7 @@
       return {
         rawItems: [],
         activeId: null,
+        loading: false,
       }
     },
 
@@ -52,12 +53,14 @@
           return
         }
 
-      getGeoItems(query)
-        .then(items => {
-          this.rawItems = items;
-          this.activeId = this.items[0].id;
-        });
-      },
+        this.loading = true;
+        getGeoItems(query)
+          .then(items => {
+            this.rawItems = items;
+            if(items.length) this.activeId = this.items[0].id;
+          })
+          .finally(() => this.loading = false)
+        },
     }
   }
 </script>
